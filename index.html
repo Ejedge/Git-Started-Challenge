@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>git-started | Safe &amp; Inclusive Version Control — AWS Learning Club NU Dasmariñas</title>
+  <meta name="description" content="Event preview for Git Started: Safe & Inclusive Version Control with AWS Learning Club – NU Dasmariñas on November 18, 2026 (12:30 PM – 5:00 PM). Three hands-on tracks covering Git foundations, beginner setup, branching, merge conflicts, and pull requests." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Press+Start+2P&family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23080d08'/%3E%3Crect x='6' y='14' width='52' height='36' rx='4' fill='%2339ff14'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='monospace' font-weight='800' font-size='22' fill='%23071107'%3Egit%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Top Navigation -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="#top" class="brand-lockup" aria-label="git-started home">
+        <span class="site-logo">git-started</span>
+      </a>
+
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation">
+        <a href="#overview">Overview</a>
+        <a href="#sessions">Sessions</a>
+        <a href="#playground">Git Lab</a>
+        <a href="#inclusive">Safe Space</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- HERO SECTION: Faithful implementation of the AWSLC NUD event poster -->
+    <section class="hero" aria-labelledby="hero-title">
+      <canvas id="matrix-canvas" class="matrix-canvas" aria-hidden="true"></canvas>
+
+      <!-- Horizon & 3D Perspective Grid matching poster bottom half -->
+      <div class="poster-backdrop" aria-hidden="true">
+        <div class="horizon-glow"></div>
+        <svg class="perspective-grid-svg" viewBox="0 0 1440 540" preserveAspectRatio="none">
+          <defs>
+            <clipPath id="gridClip">
+              <rect x="0" y="0" width="1440" height="540" />
+            </clipPath>
+            <linearGradient id="floorFade" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#090e09" stop-opacity="0.98" />
+              <stop offset="16%" stop-color="#101810" stop-opacity="0.35" />
+              <stop offset="85%" stop-color="#121b12" stop-opacity="0.1" />
+              <stop offset="100%" stop-color="#080d08" stop-opacity="0.95" />
+            </linearGradient>
+          </defs>
+          <!-- Subtle dark floor plane -->
+          <rect x="0" y="0" width="1440" height="540" fill="#0d140d" opacity="0.55" />
+          <!-- Perspective grid lines radiating from horizon center (720, -40) -->
+          <g stroke="#4f664f" stroke-width="1.4" opacity="0.62" clip-path="url(#gridClip)">
+            <!-- Horizontal foreshortened lines -->
+            <line x1="0" y1="8" x2="1440" y2="8" />
+            <line x1="0" y1="22" x2="1440" y2="22" />
+            <line x1="0" y1="40" x2="1440" y2="40" />
+            <line x1="0" y1="64" x2="1440" y2="64" />
+            <line x1="0" y1="94" x2="1440" y2="94" />
+            <line x1="0" y1="132" x2="1440" y2="132" />
+            <line x1="0" y1="178" x2="1440" y2="178" />
+            <line x1="0" y1="234" x2="1440" y2="234" />
+            <line x1="0" y1="302" x2="1440" y2="302" />
+            <line x1="0" y1="382" x2="1440" y2="382" />
+            <line x1="0" y1="474" x2="1440" y2="474" />
+            <!-- Radial lines from vanishing point (720, -60) -->
+            <line x1="720" y1="-60" x2="-620" y2="540" />
+            <line x1="720" y1="-60" x2="-420" y2="540" />
+            <line x1="720" y1="-60" x2="-240" y2="540" />
+            <line x1="720" y1="-60" x2="-80" y2="540" />
+            <line x1="720" y1="-60" x2="70" y2="540" />
+            <line x1="720" y1="-60" x2="210" y2="540" />
+            <line x1="720" y1="-60" x2="345" y2="540" />
+            <line x1="720" y1="-60" x2="475" y2="540" />
+            <line x1="720" y1="-60" x2="600" y2="540" />
+            <line x1="720" y1="-60" x2="720" y2="540" />
+            <line x1="720" y1="-60" x2="840" y2="540" />
+            <line x1="720" y1="-60" x2="965" y2="540" />
+            <line x1="720" y1="-60" x2="1095" y2="540" />
+            <line x1="720" y1="-60" x2="1230" y2="540" />
+            <line x1="720" y1="-60" x2="1370" y2="540" />
+            <line x1="720" y1="-60" x2="1520" y2="540" />
+            <line x1="720" y1="-60" x2="1680" y2="540" />
+            <line x1="720" y1="-60" x2="1860" y2="540" />
+            <line x1="720" y1="-60" x2="2060" y2="540" />
+          </g>
+          <rect x="0" y="0" width="1440" height="540" fill="url(#floorFade)" />
+        </svg>
+      </div>
+
+      <div class="container hero-content">
+        <!-- Live Countdown Eyebrow -->
+        <div class="countdown-row">
+          <span class="countdown-chip" id="countdown-chip" title="Countdown to workshop start">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            <span id="countdown-text">Loading countdown...</span>
+          </span>
+        </div>
+
+        <!-- Poster Neon Box Highlight: git-started -->
+        <div class="git-started-lockup">
+          <h1 id="hero-title" class="git-started-box">
+            <span class="box-label">git-started</span>
+            <span class="glitch-pixels" aria-hidden="true"></span>
+          </h1>
+          <p class="hero-subtitle">Safe &amp; Inclusive Version Control</p>
+        </div>
+
+        <!-- PR Badge -->
+        <div class="pr-approved-badge">
+          <span class="pr-icon" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"/>
+            </svg>
+          </span>
+          <span>PR #2026 - APPROVED</span>
+        </div>
+
+        <!-- Poster Pixel Announcement Text -->
+        <p class="poster-announcement">
+          GIT STARTED: GITHUB WORKSHOP WITH AWS LEARNING CLUB —
+          <strong class="nowrap">NOVEMBER 18, 2026, WEDNESDAY</strong> ·
+          <strong class="nowrap">12:30 PM – 5:00 PM</strong> AT <strong class="nowrap">NU DASMARIÑAS</strong>.
+          SEE YOU THERE!
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="hero-actions">
+          <a href="#sessions" class="btn btn-neon">
+            <span>Explore 3 Sessions</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="#playground" class="btn btn-outline">
+            <span>Launch Git Sandbox</span>
+          </a>
+          <button type="button" class="btn btn-ghost" id="download-ics-btn">
+            <span>+ Add to Calendar</span>
+          </button>
+        </div>
+
+        <!-- Iconic Tardigrade Clones Illustration (Spider-Man Pointing Meme) on the 3D Grid -->
+        <div class="clones-stage" aria-label="Interactive illustration of five tardigrade clones pointing at each other">
+          <div class="clone-tooltip" id="clone-tooltip" role="status" aria-live="polite">
+            <span class="prompt-tag">$ git branch -a</span>
+            <span id="clone-message">Click or hover a tardigrade clone below to inspect its branch state!</span>
+          </div>
+
+          <svg class="tardigrades-svg" viewBox="0 0 780 300" role="img" aria-labelledby="tardigrades-title">
+            <title id="tardigrades-title">Five neon-green wireframe tardigrades wearing glasses in a pointing semicircle labeled clone-v4, clone-v2, origin/main?, clone-v1, and clone-v3</title>
+            <defs>
+              <filter id="neonGlow" x="-25%" y="-25%" width="150%" height="150%">
+                <feDropShadow dx="0" dy="0" stdDeviation="3.2" flood-color="#39ff14" flood-opacity="0.65" />
+              </filter>
+              <linearGradient id="bodyFill" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#173818" />
+                <stop offset="100%" stop-color="#0b1c0c" />
+              </linearGradient>
+            </defs>
+
+            <!-- Ground shadows on the perspective grid -->
+            <g opacity="0.55">
+              <ellipse cx="122" cy="264" rx="44" ry="11" fill="#040804" stroke="#285828" stroke-width="1" />
+              <ellipse cx="255" cy="236" rx="40" ry="10" fill="#040804" stroke="#285828" stroke-width="1" />
+              <ellipse cx="390" cy="234" rx="42" ry="10" fill="#040804" stroke="#285828" stroke-width="1" />
+              <ellipse cx="525" cy="236" rx="40" ry="10" fill="#040804" stroke="#285828" stroke-width="1" />
+              <ellipse cx="658" cy="264" rx="44" ry="11" fill="#040804" stroke="#285828" stroke-width="1" />
+            </g>
+
+            <!-- 1. clone-v4 (Far Left, 3/4 view facing right/inward) -->
+            <g class="tardigrade-clone" tabindex="0" data-clone="clone-v4" data-status="git checkout -b clone-v4 — 'Wait, did someone already push the workshop slides?'" transform="translate(55, 58)">
+              <text x="67" y="16" class="clone-label" text-anchor="middle">clone-v4</text>
+              <g filter="url(#neonGlow)">
+                <!-- legs -->
+                <path d="M50 185 C46 198 48 205 56 205 C63 205 65 198 63 186" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.2" />
+                <path d="M74 185 C73 198 76 206 84 206 C91 206 93 198 88 184" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.2" />
+                <!-- segmented plump back & torso -->
+                <path d="M40 72 C24 90 22 120 30 142 C24 158 30 182 48 189 C66 195 92 188 97 170 C104 155 103 135 97 122 C104 106 100 84 89 72 Z" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.4" stroke-linejoin="round" />
+                <!-- segment creases -->
+                <path d="M31 102 C50 112 78 108 96 96" fill="none" stroke="#39ff14" stroke-width="1.8" opacity="0.85" />
+                <path d="M30 135 C52 146 82 142 97 128" fill="none" stroke="#39ff14" stroke-width="1.8" opacity="0.85" />
+                <path d="M36 164 C56 173 84 170 96 158" fill="none" stroke="#39ff14" stroke-width="1.8" opacity="0.85" />
+                <!-- pointing arm right -->
+                <path d="M90 100 C106 98 117 104 119 112 C119 118 108 121 94 117" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.2" />
+                <!-- lower arm -->
+                <path d="M88 134 C102 135 110 140 109 147 C107 153 97 153 87 148" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2" />
+                <!-- head -->
+                <ellipse cx="69" cy="60" rx="28" ry="26" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.4" />
+                <!-- back crest shading -->
+                <path d="M46 49 C56 42 74 42 84 48" fill="none" stroke="#39ff14" stroke-width="1.5" opacity="0.7" />
+                <!-- round glasses facing right -->
+                <circle cx="88" cy="59" r="9.5" fill="#091a0a" stroke="#39ff14" stroke-width="2.2" />
+                <circle cx="89" cy="59" r="3" fill="#39ff14" />
+                <line x1="69" y1="58" x2="78.5" y2="58.5" stroke="#39ff14" stroke-width="2" />
+                <circle cx="67" cy="59" r="6" fill="#091a0a" stroke="#39ff14" stroke-width="1.8" />
+                <circle cx="68" cy="59" r="2" fill="#39ff14" />
+              </g>
+            </g>
+
+            <!-- 2. clone-v2 (Mid-Left, facing center-front with glasses) -->
+            <g class="tardigrade-clone" tabindex="0" data-clone="clone-v2" data-status="git merge conflict? — 'clone-v1 changed line 12, I swear I branched from main!'" transform="translate(192, 42)">
+              <text x="62" y="14" class="clone-label" text-anchor="middle">clone-v2</text>
+              <g filter="url(#neonGlow)">
+                <!-- legs -->
+                <path d="M42 164 C39 178 42 186 50 186 C56 186 58 178 56 165" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.2" />
+                <path d="M68 164 C68 178 71 186 79 186 C85 186 87 177 83 164" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.2" />
+                <!-- segmented torso -->
+                <path d="M35 66 C22 80 24 98 32 108 C24 120 26 142 36 150 C34 164 46 172 64 172 C82 172 93 162 91 148 C99 138 99 118 90 107 C98 96 97 76 85 65 Z" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.4" />
+                <!-- segment lines -->
+                <path d="M33 98 C52 106 74 105 90 96" fill="none" stroke="#39ff14" stroke-width="1.8" opacity="0.85" />
+                <path d="M32 126 C52 135 76 134 92 124" fill="none" stroke="#39ff14" stroke-width="1.8" opacity="0.85" />
+                <path d="M37 151 C55 158 76 157 90 149" fill="none" stroke="#39ff14" stroke-width="1.8" opacity="0.85" />
+                <!-- arms pointing right toward origin/main -->
+                <path d="M84 96 C99 95 109 100 109 106 C108 112 97 113 85 108" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.1" />
+                <path d="M34 102 C22 105 18 114 23 120 C28 124 37 120 40 113" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.1" />
+                <!-- head -->
+                <ellipse cx="63" cy="54" rx="27" ry="24" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.4" />
+                <!-- round glasses -->
+                <circle cx="54" cy="53" r="9.5" fill="#091a0a" stroke="#39ff14" stroke-width="2.2" />
+                <circle cx="78" cy="53" r="9.5" fill="#091a0a" stroke="#39ff14" stroke-width="2.2" />
+                <line x1="63.5" y1="53" x2="68.5" y2="53" stroke="#39ff14" stroke-width="2.2" />
+                <circle cx="56" cy="53" r="2.8" fill="#39ff14" />
+                <circle cx="80" cy="53" r="2.8" fill="#39ff14" />
+              </g>
+            </g>
+
+            <!-- 3. origin/main? (Center, front-facing, label BELOW feet as in poster) -->
+            <g class="tardigrade-clone" tabindex="0" data-clone="origin/main?" data-status="git status — 'HEAD detached? No wait... am I the real origin/main?!'" transform="translate(328, 52)">
+              <g filter="url(#neonGlow)">
+                <!-- legs -->
+                <path d="M44 156 C42 169 44 176 51 176 C56 176 58 169 57 157" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.2" />
+                <path d="M67 156 C66 169 68 176 75 176 C80 176 82 168 80 156" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.2" />
+                <!-- plump symmetric body -->
+                <path d="M35 66 C23 80 24 98 32 108 C24 118 25 136 35 144 C33 155 45 162 62 162 C79 162 91 155 89 144 C99 136 100 118 92 108 C100 98 101 80 89 66 Z" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.4" />
+                <!-- segment lines -->
+                <path d="M33 96 C50 104 74 104 91 96" fill="none" stroke="#39ff14" stroke-width="1.8" opacity="0.85" />
+                <path d="M32 122 C50 130 74 130 92 122" fill="none" stroke="#39ff14" stroke-width="1.8" opacity="0.85" />
+                <path d="M36 144 C52 151 72 151 88 144" fill="none" stroke="#39ff14" stroke-width="1.8" opacity="0.85" />
+                <!-- bewildered front arms -->
+                <path d="M34 100 C22 102 18 112 24 118 C29 122 37 117 39 111" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2" />
+                <path d="M90 100 C102 102 106 112 100 118 C95 122 87 117 85 111" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2" />
+                <!-- head -->
+                <ellipse cx="62" cy="54" rx="26" ry="23" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.4" />
+                <!-- front round glasses -->
+                <circle cx="50" cy="53" r="9.5" fill="#091a0a" stroke="#39ff14" stroke-width="2.2" />
+                <circle cx="74" cy="53" r="9.5" fill="#091a0a" stroke="#39ff14" stroke-width="2.2" />
+                <line x1="59.5" y1="53" x2="64.5" y2="53" stroke="#39ff14" stroke-width="2.2" />
+                <circle cx="50" cy="53" r="2.7" fill="#39ff14" />
+                <circle cx="74" cy="53" r="2.7" fill="#39ff14" />
+              </g>
+              <text x="62" y="218" class="clone-label origin-label" text-anchor="middle">origin/main?</text>
+            </g>
+
+            <!-- 4. clone-v1 (Mid-Right, mirroring clone-v2 facing center-left) -->
+            <g class="tardigrade-clone" tabindex="0" data-clone="clone-v1" data-status="git commit -m 'first commit' — 'Everyone copies me, why am I still blamed for bugs?!'" transform="translate(464, 42)">
+              <text x="62" y="14" class="clone-label" text-anchor="middle">clone-v1</text>
+              <g filter="url(#neonGlow)">
+                <!-- legs -->
+                <path d="M42 164 C39 178 42 186 50 186 C56 186 58 178 56 165" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.2" />
+                <path d="M68 164 C68 178 71 186 79 186 C85 186 87 177 83 164" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.2" />
+                <!-- torso -->
+                <path d="M38 65 C26 76 25 96 33 107 C24 118 24 138 32 148 C30 162 41 172 59 172 C77 172 89 164 87 150 C97 142 99 120 91 108 C99 98 101 80 88 66 Z" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.4" />
+                <!-- segment lines -->
+                <path d="M33 96 C49 105 71 106 90 98" fill="none" stroke="#39ff14" stroke-width="1.8" opacity="0.85" />
+                <path d="M31 124 C47 134 71 135 91 126" fill="none" stroke="#39ff14" stroke-width="1.8" opacity="0.85" />
+                <path d="M33 149 C47 157 68 158 86 151" fill="none" stroke="#39ff14" stroke-width="1.8" opacity="0.85" />
+                <!-- pointing arm left -->
+                <path d="M39 96 C24 95 14 100 14 106 C15 112 26 113 38 108" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.1" />
+                <path d="M89 102 C101 105 105 114 100 120 C95 124 86 120 83 113" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.1" />
+                <!-- head -->
+                <ellipse cx="60" cy="54" rx="27" ry="24" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.4" />
+                <!-- round glasses -->
+                <circle cx="45" cy="53" r="9.5" fill="#091a0a" stroke="#39ff14" stroke-width="2.2" />
+                <circle cx="69" cy="53" r="9.5" fill="#091a0a" stroke="#39ff14" stroke-width="2.2" />
+                <line x1="54.5" y1="53" x2="59.5" y2="53" stroke="#39ff14" stroke-width="2.2" />
+                <circle cx="43" cy="53" r="2.8" fill="#39ff14" />
+                <circle cx="67" cy="53" r="2.8" fill="#39ff14" />
+              </g>
+            </g>
+
+            <!-- 5. clone-v3 (Far Right, mirroring clone-v4 facing left/inward) -->
+            <g class="tardigrade-clone" tabindex="0" data-clone="clone-v3" data-status="git pull origin main — 'Hold on, let me pull before we merge PR #2026!'" transform="translate(590, 58)">
+              <text x="68" y="16" class="clone-label" text-anchor="middle">clone-v3</text>
+              <g filter="url(#neonGlow)">
+                <!-- legs -->
+                <path d="M47 184 C42 198 44 206 51 206 C59 206 62 198 61 185" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.2" />
+                <path d="M72 186 C70 198 72 205 79 205 C87 205 89 198 85 185" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.2" />
+                <!-- plump torso facing left -->
+                <path d="M46 72 C35 84 31 106 38 122 C32 135 31 155 38 170 C43 188 69 195 87 189 C105 182 111 158 105 142 C113 120 111 90 95 72 Z" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.4" stroke-linejoin="round" />
+                <!-- segment lines -->
+                <path d="M39 96 C57 108 85 112 104 102" fill="none" stroke="#39ff14" stroke-width="1.8" opacity="0.85" />
+                <path d="M38 128 C53 142 83 146 105 135" fill="none" stroke="#39ff14" stroke-width="1.8" opacity="0.85" />
+                <path d="M39 158 C51 170 79 173 99 164" fill="none" stroke="#39ff14" stroke-width="1.8" opacity="0.85" />
+                <!-- pointing arm left -->
+                <path d="M45 100 C29 98 18 104 16 112 C16 118 27 121 41 117" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.2" />
+                <path d="M47 134 C33 135 25 140 26 147 C28 153 38 153 48 148" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2" />
+                <!-- head -->
+                <ellipse cx="66" cy="60" rx="28" ry="26" fill="url(#bodyFill)" stroke="#39ff14" stroke-width="2.4" />
+                <path d="M51 48 C61 42 79 42 89 49" fill="none" stroke="#39ff14" stroke-width="1.5" opacity="0.7" />
+                <!-- round glasses facing left -->
+                <circle cx="47" cy="59" r="9.5" fill="#091a0a" stroke="#39ff14" stroke-width="2.2" />
+                <circle cx="46" cy="59" r="3" fill="#39ff14" />
+                <line x1="56.5" y1="58.5" x2="66" y2="58" stroke="#39ff14" stroke-width="2" />
+                <circle cx="68" cy="59" r="6" fill="#091a0a" stroke="#39ff14" stroke-width="1.8" />
+                <circle cx="67" cy="59" r="2" fill="#39ff14" />
+              </g>
+            </g>
+          </svg>
+
+          <p class="clones-caption">Interactive Poster Art · Tap any tardigrade clone to view its Git state</p>
+        </div>
+
+        <!-- Key Event Logistics Strip -->
+        <dl class="event-meta-strip" aria-label="Event logistics summary">
+          <div class="meta-item">
+            <dt>DATE</dt>
+            <dd>November 18, 2026 <span class="meta-sub">(Wednesday)</span></dd>
+          </div>
+          <div class="meta-item">
+            <dt>TIME</dt>
+            <dd>12:30 PM – 5:00 PM <span class="meta-sub">4.5 hrs hands-on</span></dd>
+          </div>
+          <div class="meta-item">
+            <dt>VENUE</dt>
+            <dd>NU Dasmariñas <span class="meta-sub">On-Campus Workshop</span></dd>
+          </div>
+          <div class="meta-item">
+            <dt>HOSTED BY</dt>
+            <dd>AWS Learning Club <span class="meta-sub">NU Dasmariñas Chapter</span></dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- OVERVIEW SECTION -->
+    <section class="section" id="overview" aria-labelledby="overview-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">README.md · WORKSHOP BRIEF</span>
+          <h2 id="overview-heading">Why <span class="neon-text">Git Started</span>?</h2>
+          <p class="section-lead">
+            Designed for NU Dasmariñas students taking their first confident step into modern software collaboration—turning intimidating terminal errors into safe, practical team workflows.
+          </p>
+        </div>
+
+        <div class="overview-grid">
+          <article class="terminal-card overview-main">
+            <div class="terminal-topbar">
+              <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="terminal-title">PR #2026 — feat/safe-inclusive-git-workshop</span>
+              <span class="badge-merged">APPROVED</span>
+            </div>
+            <div class="terminal-body">
+              <p>
+                The workshop introduces students to <strong>Git and GitHub</strong> from the ground up—covering repositories, meaningful commits, branching strategies, pull requests, and collaborative team workflows.
+              </p>
+              <p>
+                With practical guidance from experienced GitHub practitioners, participants won't just memorize commands—they'll understand <em>why</em> version control protects their work and fosters an inclusive engineering culture where beginners feel safe to experiment, review, and ship.
+              </p>
+              <div class="skill-chips" aria-label="Topics covered">
+                <span class="chip">Repositories</span>
+                <span class="chip">Commits &amp; History</span>
+                <span class="chip">Branching</span>
+                <span class="chip">Merge Conflict Resolution</span>
+                <span class="chip">Pull Requests</span>
+                <span class="chip">Collaborative Workflows</span>
+              </div>
+            </div>
+          </article>
+
+          <aside class="terminal-card checklist-card" aria-label="Workshop readiness checklist">
+            <div class="terminal-topbar">
+              <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="terminal-title">prerequisites.sh</span>
+            </div>
+            <div class="terminal-body">
+              <h3 class="card-subtitle">What to bring</h3>
+              <ul class="check-list">
+                <li><span class="check-mark" aria-hidden="true">[✓]</span> Your laptop (Windows, macOS, or Linux)</li>
+                <li><span class="check-mark" aria-hidden="true">[✓]</span> A free GitHub account created before Session 2</li>
+                <li><span class="check-mark" aria-hidden="true">[✓]</span> VS Code or your preferred code editor</li>
+                <li><span class="check-mark" aria-hidden="true">[✓]</span> Curiosity — zero prior Git experience needed!</li>
+              </ul>
+              <div class="tip-box">
+                <strong>Beginner Guarantee:</strong> We configure local Git step-by-step together during Session 2, so no one gets left behind.
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3-TRACK SESSIONS SECTION -->
+    <section class="section section-alt" id="sessions" aria-labelledby="sessions-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">CURRICULUM · 3 PROGRESSIVE TRACKS</span>
+          <h2 id="sessions-heading">Workshop <span class="neon-text">Sessions</span></h2>
+          <p class="section-lead">
+            Structured across three progressive blocks from core concepts to live pull request collaboration.
+          </p>
+        </div>
+
+        <div class="sessions-grid">
+          <!-- Session 1 -->
+          <article class="session-card" data-session="1">
+            <div class="session-head">
+              <span class="session-num">SESSION 01</span>
+              <span class="session-badge">Lecture / Intro</span>
+            </div>
+            <h3>Git &amp; GitHub Foundations</h3>
+            <p class="session-time">1:00 PM – 1:50 PM · Intro Talk &amp; Live Demo</p>
+            <p class="session-desc">
+              A focused foundational talk demystifying version control basics, how local and remote repositories work together, and why Git beats <code>final_thesis_v3_FINAL.zip</code>.
+            </p>
+            <div class="command-explorer" aria-label="Essential Git commands covered in Session 1">
+              <p class="mini-label">Click a command to preview:</p>
+              <div class="cmd-buttons" role="tablist">
+                <button type="button" class="cmd-btn is-active" data-cmd="clone">git clone</button>
+                <button type="button" class="cmd-btn" data-cmd="add">git add</button>
+                <button type="button" class="cmd-btn" data-cmd="commit">git commit</button>
+                <button type="button" class="cmd-btn" data-cmd="push">git push</button>
+                <button type="button" class="cmd-btn" data-cmd="pull">git pull</button>
+              </div>
+              <div class="cmd-preview" id="session1-cmd-preview" role="tabpanel">
+                <code>$ git clone https://github.com/awslc-nud/git-started.git</code>
+                <span>Downloads a complete copy of a remote GitHub repository to your local machine.</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Session 2 -->
+          <article class="session-card" data-session="2">
+            <div class="session-head">
+              <span class="session-num">SESSION 02</span>
+              <span class="session-badge badge-hands-on">Hands-On Beginner</span>
+            </div>
+            <h3>Hands-On Beginner Track</h3>
+            <p class="session-time">1:50 PM – 3:10 PM · Guided Setup &amp; First Commit</p>
+            <p class="session-desc">
+              Guided step-by-step lab where participants configure local Git, initialize and link their first GitHub repository, stage files, and ship their very first commit.
+            </p>
+            <div class="step-tracker">
+              <p class="mini-label">Interactive Track Checklist (try ticking steps):</p>
+              <label class="step-item">
+                <input type="checkbox" class="track-step-check" checked />
+                <span><code>git config</code> — Set local author name &amp; email</span>
+              </label>
+              <label class="step-item">
+                <input type="checkbox" class="track-step-check" />
+                <span>Create first repository on GitHub</span>
+              </label>
+              <label class="step-item">
+                <input type="checkbox" class="track-step-check" />
+                <span><code>git init</code> &amp; stage README via <code>git add</code></span>
+              </label>
+              <label class="step-item">
+                <input type="checkbox" class="track-step-check" />
+                <span>Make first commit &amp; push to <code>origin/main</code></span>
+              </label>
+              <div class="step-progress-bar" aria-hidden="true">
+                <div class="step-progress-fill" id="session2-progress" style="width: 25%"></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Session 3 -->
+          <article class="session-card" data-session="3">
+            <div class="session-head">
+              <span class="session-num">SESSION 03</span>
+              <span class="session-badge badge-intermediate">Intermediate Workflows</span>
+            </div>
+            <h3>Branching, Merge Conflicts &amp; PRs</h3>
+            <p class="session-time">3:25 PM – 4:40 PM · Collaborative Lab</p>
+            <p class="session-desc">
+              Level up into real-world teamwork: isolating features on branches, calmly resolving intentional merge conflicts without losing code, and opening clean Pull Requests.
+            </p>
+            <div class="branch-diagram" aria-label="Branch and Pull Request visual diagram">
+              <svg viewBox="0 0 320 112" width="100%" height="112" role="img" aria-label="Branch flow from main to feature branch and PR merge">
+                <line x1="26" y1="30" x2="294" y2="30" stroke="#2c632c" stroke-width="3" />
+                <path d="M78 30 C102 30 105 78 132 78 L206 78 C232 78 236 30 262 30" fill="none" stroke="#39ff14" stroke-width="2.6" />
+                <!-- main commits -->
+                <circle cx="34" cy="30" r="6" fill="#0d220e" stroke="#39ff14" stroke-width="2" />
+                <circle cx="78" cy="30" r="6" fill="#0d220e" stroke="#39ff14" stroke-width="2" />
+                <circle cx="170" cy="30" r="6" fill="#0d220e" stroke="#8aa38a" stroke-width="2" />
+                <circle cx="262" cy="30" r="7.5" fill="#39ff14" />
+                <!-- feature commits -->
+                <circle cx="136" cy="78" r="6" fill="#0d220e" stroke="#39ff14" stroke-width="2" />
+                <circle cx="200" cy="78" r="6" fill="#0d220e" stroke="#39ff14" stroke-width="2" />
+                <!-- labels -->
+                <text x="34" y="16" fill="#8aa38a" font-size="10" font-family="JetBrains Mono, monospace">main</text>
+                <text x="136" y="100" fill="#39ff14" font-size="10" font-family="JetBrains Mono, monospace">feat/clone-v1</text>
+                <text x="242" y="16" fill="#39ff14" font-size="10" font-weight="700" font-family="JetBrains Mono, monospace">PR #2026</text>
+              </svg>
+              <ul class="mini-highlights">
+                <li>Safe branching with <code>git switch -c</code></li>
+                <li>Resolving <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> markers cleanly</li>
+                <li>Constructive code review &amp; PR etiquette</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE GIT SANDBOX & MERGE CONFLICT LAB -->
+    <section class="section" id="playground" aria-labelledby="playground-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">INTERACTIVE PREVIEW · HANDS-ON SANDBOX</span>
+          <h2 id="playground-heading">Try the <span class="neon-text">Git Sandbox</span></h2>
+          <p class="section-lead">
+            Preview what students will practice across Sessions 1–3 right in your browser—run terminal commands or test resolving a merge conflict!
+          </p>
+        </div>
+
+        <div class="playground-grid">
+          <!-- Interactive Terminal -->
+          <div class="terminal-card sandbox-terminal">
+            <div class="terminal-topbar">
+              <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="terminal-title">student@nud-awslc:~/git-started</span>
+              <button type="button" class="mini-reset-btn" id="reset-terminal-btn">Reset Repo</button>
+            </div>
+
+            <div class="terminal-output" id="terminal-output" aria-live="polite">
+              <div class="line dim">Welcome to the git-started interactive preview terminal (Nov 18, 2026).</div>
+              <div class="line dim">Try any command below or type <code>help</code>: <code>git init</code>, <code>git clone [url]</code>, <code>git status</code>, <code>git add [file]</code>, <code>git commit -m "[message]"</code>, <code>git push origin [branch]</code>, <code>git pull</code>, <code>git branch [branch-name]</code>, <code>git checkout -b [branch-name]</code>.</div>
+            </div>
+
+            <div class="quick-cmds" aria-label="Quick command presets">
+              <button type="button" class="quick-cmd" data-run="git init">git init</button>
+              <button type="button" class="quick-cmd" data-run="git clone https://github.com/awslc-nud/git-started.git">git clone</button>
+              <button type="button" class="quick-cmd" data-run="git status">git status</button>
+              <button type="button" class="quick-cmd" data-run="git add workshop_notes.md">git add [file]</button>
+              <button type="button" class="quick-cmd" data-run="git add .">git add .</button>
+              <button type="button" class="quick-cmd" data-run='git commit -m "feat: add intro"'>git commit -m</button>
+              <button type="button" class="quick-cmd" data-run="git push origin">git push origin</button>
+              <button type="button" class="quick-cmd" data-run="git pull">git pull</button>
+              <button type="button" class="quick-cmd" data-run="git branch">git branch</button>
+              <button type="button" class="quick-cmd" data-run="git checkout -b feat/clone-v5">git checkout -b</button>
+            </div>
+
+            <form class="terminal-input-row" id="terminal-form">
+              <label for="terminal-input" class="sr-only">Enter a Git command</label>
+              <span class="prompt-prefix" id="terminal-branch-label">(main) $</span>
+              <input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="Type any git command or click a preset..." />
+              <button type="submit" class="run-btn">Run</button>
+            </form>
+          </div>
+
+          <!-- Session 3 Merge Conflict Resolver Demo -->
+          <div class="terminal-card conflict-lab">
+            <div class="terminal-topbar">
+              <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="terminal-title">Session 3 Demo · conflict_resolver.md</span>
+              <span class="conflict-status" id="conflict-status-badge">1 Conflict</span>
+            </div>
+            <div class="terminal-body">
+              <p class="conflict-intro">
+                Uh-oh! Both <code>origin/main</code> and <code>clone-v1</code> edited the workshop date. Pick the accurate resolution to approve <strong>PR #2026</strong>:
+              </p>
+
+              <div class="code-conflict-box" id="conflict-box">
+                <div class="diff-marker head">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD (origin/main)</div>
+                <div class="diff-line old">Workshop Date: Pending reschedule...</div>
+                <div class="diff-marker sep">=======</div>
+                <div class="diff-line incoming">Workshop Date: Nov 18, 2026 (Wed) · 12:30 PM–5:00 PM @ NU Dasmariñas</div>
+                <div class="diff-marker tail">&gt;&gt;&gt;&gt;&gt;&gt;&gt; clone-v1</div>
+              </div>
+
+              <div class="conflict-actions" id="conflict-actions">
+                <button type="button" class="btn-resolve" data-choice="current">Keep Old Draft</button>
+                <button type="button" class="btn-resolve primary" data-choice="incoming">Accept Updated Schedule</button>
+                <button type="button" class="btn-resolve" data-choice="both">Keep Both (Include Notice)</button>
+              </div>
+
+              <div class="conflict-feedback" id="conflict-feedback" role="status" aria-live="polite">
+                Choose a resolution above to stage and merge PR #2026.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sandbox Command Reference -->
+        <div class="terminal-card cmd-cheatsheet" aria-labelledby="cheatsheet-heading">
+          <div class="terminal-topbar">
+            <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="terminal-title" id="cheatsheet-heading">sandbox_commands.md — Click any command to run it in the terminal above</span>
+          </div>
+          <div class="cheatsheet-grid">
+            <button type="button" class="cheat-item" data-run="git init">
+              <code>git init</code>
+              <span>Initializes a new, empty Git repository in the current working directory.</span>
+            </button>
+            <button type="button" class="cheat-item" data-run="git clone https://github.com/awslc-nud/git-started.git">
+              <code>git clone [url]</code>
+              <span>Copies an existing remote repository onto your local computer.</span>
+            </button>
+            <button type="button" class="cheat-item" data-run="git status">
+              <code>git status</code>
+              <span>Displays the state of the working directory and staging area (tracked/untracked files, modified files).</span>
+            </button>
+            <button type="button" class="cheat-item" data-run="git add .">
+              <code>git add [file]</code>
+              <span>Adds specific file changes from the working directory to the staging area (use <strong>git add .</strong> to stage all changes).</span>
+            </button>
+            <button type="button" class="cheat-item" data-run='git commit -m "feat: add workshop notes"'>
+              <code>git commit -m "[message]"</code>
+              <span>Saves staged snapshot permanently into the local repository history with an explanatory message.</span>
+            </button>
+            <button type="button" class="cheat-item" data-run="git push origin">
+              <code>git push origin [branch]</code>
+              <span>Uploads local commits to the remote branch on GitHub.</span>
+            </button>
+            <button type="button" class="cheat-item" data-run="git pull">
+              <code>git pull</code>
+              <span>Fetches updates from the remote repository and immediately merges them into the current local branch.</span>
+            </button>
+            <button type="button" class="cheat-item" data-run="git branch feat/notes">
+              <code>git branch [branch-name]</code>
+              <span>Lists, creates, or deletes development branches (run <strong>git branch</strong> to list or <strong>-d</strong> to delete).</span>
+            </button>
+            <button type="button" class="cheat-item" data-run="git checkout -b feat/clone-v5">
+              <code>git checkout -b [branch-name]</code>
+              <span>Creates a new branch and instantly switches to it.</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SAFE & INCLUSIVE VERSION CONTROL -->
+    <section class="section section-alt" id="inclusive" aria-labelledby="inclusive-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">CODE OF CONDUCT · SAFE &amp; INCLUSIVE</span>
+          <h2 id="inclusive-heading">Safe &amp; Inclusive <span class="neon-text">Version Control</span></h2>
+          <p class="section-lead">
+            Learning Git can feel overwhelming the first time you hit a detached HEAD or a merge conflict. Our room is built so every student feels welcome.
+          </p>
+        </div>
+
+        <div class="pillars-grid">
+          <article class="pillar-card">
+            <div class="pillar-icon" aria-hidden="true">01</div>
+            <h3>No Gatekeeping, Ever</h3>
+            <p>
+              Whether it's your first time opening a terminal or you already push daily, questions are celebrated—there are no "basic" questions in this workshop.
+            </p>
+          </article>
+          <article class="pillar-card">
+            <div class="pillar-icon" aria-hidden="true">02</div>
+            <h3>Safe Experimentation</h3>
+            <p>
+              Git's superpower is safety. We teach students how commits, branches, and <code>git revert</code> let you try bold ideas without fear of breaking everything.
+            </p>
+          </article>
+          <article class="pillar-card">
+            <div class="pillar-icon" aria-hidden="true">03</div>
+            <h3>Kind Pull Request Reviews</h3>
+            <p>
+              Code reviews focus on shared learning, inclusive language (<code>main</code> branch conventions), and uplifting teammates across NU Dasmariñas.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER MATCHING POSTER CONTACT ROW -->
+  <footer class="site-footer" id="connect">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">git-started</span>
+        <p>Safe &amp; Inclusive Version Control · November 18, 2026 · 12:30 PM – 5:00 PM · NU Dasmariñas</p>
+      </div>
+
+      <div class="footer-contacts" aria-label="Official AWS Learning Club NU Dasmariñas contacts">
+        <a href="https://www.facebook.com/AWSLCNUD" target="_blank" rel="noopener noreferrer" class="contact-pill">
+          <span class="contact-icon" aria-hidden="true">f</span>
+          <span>@AWSLCNUD</span>
+        </a>
+        <a href="mailto:AWSLCNUD@GMAIL.COM" class="contact-pill">
+          <span class="contact-icon" aria-hidden="true">✉</span>
+          <span>AWSLCNUD@GMAIL.COM</span>
+        </a>
+        <button type="button" class="contact-pill copy-btn" id="copy-email-btn" data-copy="AWSLCNUD@GMAIL.COM">
+          <span>Copy Email</span>
+        </button>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>Sample Event Preview Website · Styled from the AWS Learning Club – NU Dasmariñas <code>git-started</code> Event Design.</p>
+    </div>
+  </footer>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
