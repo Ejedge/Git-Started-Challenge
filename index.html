@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>git-started | Safe &amp; Inclusive Version Control — AWS Learning Club NU Dasmariñas</title>
   <meta name="description" content="Event preview for Git Started: Safe & Inclusive Version Control with AWS Learning Club – NU Dasmariñas on November 18, 2026 (12:30 PM – 5:00 PM). Three hands-on tracks covering Git foundations, beginner setup, branching, merge conflicts, and pull requests." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,7 +16,7 @@
 
   <!-- Top Navigation -->
   <header class="site-header" id="top">
-    <div class="container header-inner">
+    <div class="header-inner">
       <a href="#top" class="brand-lockup" aria-label="git-started home">
         <span class="site-logo">git-started</span>
       </a>
@@ -140,16 +140,15 @@
           <a href="#playground" class="btn btn-outline">
             <span>Launch Git Sandbox</span>
           </a>
-          <button type="button" class="btn btn-ghost" id="download-ics-btn">
-            <span>+ Add to Calendar</span>
-          </button>
         </div>
 
         <!-- Iconic Tardigrade Clones Illustration (Spider-Man Pointing Meme) on the 3D Grid -->
         <div class="clones-stage" aria-label="Interactive illustration of five tardigrade clones pointing at each other">
           <div class="clone-tooltip" id="clone-tooltip" role="status" aria-live="polite">
             <span class="prompt-tag">$ git branch -a</span>
-            <span id="clone-message">Click or hover a tardigrade clone below to inspect its branch state!</span>
+            <span class="clone-message-wrap">
+              <span id="clone-message">Click or hover a tardigrade clone below to inspect its branch state!</span>
+            </span>
           </div>
 
           <svg class="tardigrades-svg" viewBox="0 0 780 300" role="img" aria-labelledby="tardigrades-title">

@@ -17,10 +17,17 @@
     let lastTick = 0;
 
     function resize() {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-      columns = Math.max(1, Math.floor(canvas.width / fontSize));
-      drops = Array.from({ length: columns }, () => Math.floor(Math.random() * 24));
+      const nextWidth = canvas.offsetWidth;
+      const nextHeight = canvas.offsetHeight;
+      if (canvas.width === nextWidth && canvas.height === nextHeight) return false;
+      canvas.width = nextWidth;
+      canvas.height = nextHeight;
+      const nextColumns = Math.max(1, Math.floor(canvas.width / fontSize));
+      if (nextColumns !== columns || drops.length === 0) {
+        columns = nextColumns;
+        drops = Array.from({ length: columns }, () => Math.floor(Math.random() * 24));
+      }
+      return true;
     }
 
     function drawStatic() {
@@ -62,11 +69,15 @@
       rafId = window.requestAnimationFrame(tick);
     }
 
+    const handleResize = () => {
+      if (resize() && prefersReducedMotion) drawStatic();
+    };
+
     resize();
-    window.addEventListener("resize", () => {
-      resize();
-      if (prefersReducedMotion) drawStatic();
-    });
+    window.addEventListener("resize", handleResize);
+    if (typeof ResizeObserver !== "undefined") {
+      new ResizeObserver(handleResize).observe(canvas);
+    }
 
     if (prefersReducedMotion) {
       drawStatic();
@@ -101,6 +112,27 @@
 
     nav.querySelectorAll("a, button").forEach((el) => {
       el.addEventListener("click", closeNav);
+    });
+
+    const desktopMq = window.matchMedia("(min-width: 781px)");
+    const handleViewportChange = (e) => {
+      if (e.matches) closeNav();
+    };
+    if (desktopMq.addEventListener) {
+      desktopMq.addEventListener("change", handleViewportChange);
+    } else if (desktopMq.addListener) {
+      desktopMq.addListener(handleViewportChange);
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeNav();
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!nav.classList.contains("is-open")) return;
+      if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+        closeNav();
+      }
     });
   }
 
@@ -138,16 +170,36 @@
     const msgEl = document.getElementById("clone-message");
     if (!clones.length || !msgEl) return;
 
+    const wrapEl = msgEl.parentElement;
+    if (wrapEl && wrapEl.classList.contains("clone-message-wrap")) {
+      clones.forEach((clone) => {
+        const name = clone.getAttribute("data-clone") || "clone";
+        const status = clone.getAttribute("data-status") || "";
+        const ghost = document.createElement("span");
+        ghost.className = "clone-message-ghost";
+        ghost.setAttribute("aria-hidden", "true");
+        ghost.textContent = `[${name}] ${status}`;
+        wrapEl.appendChild(ghost);
+      });
+    }
+
     const activateClone = (el) => {
       clones.forEach((c) => c.classList.remove("is-selected"));
       el.classList.add("is-selected");
       const name = el.getAttribute("data-clone") || "clone";
       const status = el.getAttribute("data-status") || "";
-      msgEl.textContent = `[${name}] ${status}`;
+      const nextText = `[${name}] ${status}`;
+      if (msgEl.textContent !== nextText) {
+        msgEl.textContent = nextText;
+        msgEl.classList.remove("is-updating");
+        void msgEl.offsetWidth;
+        msgEl.classList.add("is-updating");
+      }
     };
 
     clones.forEach((clone) => {
       clone.addEventListener("mouseenter", () => activateClone(clone));
+      clone.addEventListener("focus", () => activateClone(clone));
       clone.addEventListener("click", () => activateClone(clone));
       clone.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
@@ -604,7 +656,7 @@
     });
   }
 
-  /* ---------------- 9. Calendar .ics Generator & Email Copy ---------------- */
+  /* ---------------- 9. Email Copy Utility ---------------- */
   function initUtilities() {
     const toast = document.getElementById("toast");
     let toastTimer = null;
@@ -618,39 +670,6 @@
         toast.hidden = true;
       }, 3200);
     };
-
-    const icsBtn = document.getElementById("download-ics-btn");
-    if (icsBtn) {
-      icsBtn.addEventListener("click", () => {
-        // Nov 18, 2026 12:30 PM - 5:00 PM Asia/Manila (UTC+8) -> 04:30Z to 09:00Z
-        const ics = [
-          "BEGIN:VCALENDAR",
-          "VERSION:2.0",
-          "PRODID:-//AWS Learning Club NU Dasmarinas//Git Started 2026//EN",
-          "BEGIN:VEVENT",
-          "UID:git-started-2026@awslcnud.org",
-          "DTSTAMP:20261115T120000Z",
-          "DTSTART:20261118T043000Z",
-          "DTEND:20261118T090000Z",
-          "SUMMARY:Git Started: Safe & Inclusive Version Control (AWS Learning Club)",
-          "LOCATION:NU Dasmariñas",
-          "DESCRIPTION:Sessions: 1) Git & GitHub Foundations, 2) Hands-On Beginner Track, 3) Intermediate Workflows (Branching, Merge Conflicts & Pull Requests). Contact: AWSLCNUD@GMAIL.COM",
-          "END:VEVENT",
-          "END:VCALENDAR"
-        ].join("\r\n");
-
-        const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "git-started-nov-18-2026.ics";
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        URL.revokeObjectURL(url);
-        showToast("Downloaded git-started-nov-18-2026.ics calendar invite!");
-      });
-    }
 
     const copyBtn = document.getElementById("copy-email-btn");
     if (copyBtn) {
